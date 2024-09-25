@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="utf-8">
+    <!-- 赵明珠 
+        2024年9月19日 -->
+</head>  
+
+<script src="randominteger.js"></script>
+<script>
+    //exercise1
+    document.write("<h1>Number Guessing Game</h1>");
+    document.write("<p>There is a number between <strong>1 and 100</strong>. Please guess it.</p>");
+    //exercise2
+    // 获取浏览器名称
+    console.log("Browser Name: " + navigator.appName);
+
+    // 获取用户代理字符串
+    console.log("User Agent: " + navigator.userAgent);
+
+    // 检查浏览器是否支持Geolocation
+    if ("geolocation" in navigator) {
+        console.log("Geolocation is supported.");
+    } else {
+        console.log("Geolocation is not supported.");
+    }
+    let trueNumber = randomInt();  
+    let guessesLeft = 10;  
+    let guessedNumbers = []; // Array to store guessed numbers
+
+    function checkGuess() {  
+        const userGuess = parseInt(document.getElementById('userGuess').value, 10);  
+        if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {  
+            alert('Please enter a number between 1 and 100！');  
+            return;  
+        }  
+
+        guessesLeft--;  
+        document.getElementById('guessesLeft').textContent = guessesLeft;  
+        guessedNumbers.push(userGuess); // Add the guessed number to the array
+        updateGuessedNumbersDisplay(); // Update the display of guessed numbers
+
+        if (userGuess < trueNumber) {  
+            document.getElementById('result').textContent = 'Too low！';  
+        } else if (userGuess > trueNumber) {  
+            document.getElementById('result').textContent = 'Too high！';  
+        } else {   
+            alert('Game over！You have guessed ' + (10-guessesLeft) + ' times.'); 
+            resetGame();//Auto to reset           
+        }  
+        if (guessesLeft == 0) {  
+            alert('Unfortunately, you have run out of guesses. The right answer is：' + trueNumber);      
+        }  
+    }  
+
+    function updateGuessedNumbersDisplay() {
+        const guessedNumbersElement = document.getElementById('guessedNumbers');
+        guessedNumbersElement.textContent = guessedNumbers.join(' '); // Join the array elements with a space
+    }
+
+    function resetGame() {  
+        trueNumber = randomInt();  
+        guessesLeft = 10;  
+        guessedNumbers = []; // Reset the guessed numbers array
+        document.getElementById('userGuess').value = '';  
+        document.getElementById('guessesLeft').textContent = guessesLeft;  
+        document.getElementById('result').textContent = '';  
+        updateGuessedNumbersDisplay(); // Clear the display of guessed numbers
+    }  
+</script>
+<body> 
+    <p>Remaining times：<span id="guessesLeft">10</span></p>
+    <p>Guessed numbers: <span id="guessedNumbers"></span></p> 
+    <input id="userGuess">  
+    <button onclick="checkGuess()">Guess</button>  
+    <p id="result"></p>  
+    <button onclick="resetGame()">Restart</button> 
+</body>
+</html>
