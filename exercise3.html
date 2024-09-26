@@ -1,0 +1,23 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="utf-8">
+    <!-- 赵明珠 
+        2024年9月19日 -->
+</head>  
+<body> 
+    <!-- 添加一个按钮 -->
+    <button onclick="showRandomNumber()">Generate Random Number</button>
+    <!-- 显示随机数字的容器 -->
+    <div id="randomNumberContainer"></div>
+
+    <script src="randominteger.js"></script>
+    <script>
+        // 定义一个函数来显示随机数字
+        function showRandomNumber() {
+            var randomNumber = randomInt(); 
+            document.getElementById('randomNumberContainer').innerText = "Random number: " + randomNumber;
+        }
+    </script>
+</body>
+</html>
